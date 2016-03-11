@@ -1,0 +1,5 @@
+#accordion-section-alchem-sections-order .accordion-section-title:after,
+#accordion-section-alchem-pricing-table .accordion-section-title:after,
+#accordion-section-alchem-portfolios .accordion-section-title:after{
+    content: "\f160";
+}
