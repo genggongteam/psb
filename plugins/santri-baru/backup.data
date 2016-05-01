@@ -1,0 +1,236 @@
+	jQuery(".acf-table .acf-row td:nth-last-child(2) .acf-input").after("<p class='nlc2'><p><br><a id='minimize' class='ew-link'>input mode</a>");
+	jQuery(".acf-table .acf-row td:nth-last-child(3) .acf-input").after("<p class='nlc2'><p>");
+	jQuery(".acf-table .acf-row td:nth-last-child(4) .acf-input").after("<p class='nlc2'><p>");
+	jQuery(".acf-table .acf-row td:nth-last-child(5) .acf-input").after("<p class='nlc2'><p>");
+	jQuery(".acf-table .acf-row td:nth-last-child(6) .acf-input").after("<p class='nlc2'><p>");
+	jQuery(".acf-table .acf-row td:nth-last-child(7) .acf-input").after("<p class='nlc2'><p>");
+	jQuery(".acf-table .acf-row td:nth-last-child(8) .acf-input").after("<p class='nlc2'><p>");
+	jQuery(".acf-table .acf-row td:nth-last-child(9) .acf-input").after("<p class='nlc2'><p>");
+	jQuery(".acf-row .acf-input").hide();
+	
+	
+	jQuery(document).on('click', ".acf-row #minimize", function(){
+		jQuery(this).parents(".acf-row").find(".acf-input").slideUp("slow");
+		jQuery(this).parents(".acf-row").find("#minimize").html('table mode');
+		jQuery(this).parents(".acf-row").find("a").attr("id","maximize");		
+	});	
+	
+	jQuery(document).on('click', ".acf-row #maximize", function(){
+		jQuery(this).parents(".acf-row").find(".acf-input").slideDown("slow");
+		jQuery(this).parents(".acf-row").find("#maximize").html('input mode');
+		jQuery(this).parents(".acf-row").find("a").attr("id","minimize");		
+	});
+	
+	
+jQuery(document).ready(function() {
+	var row1billed 		= jQuery(".acf-table .acf-row:nth-child(1) td:nth-last-child(2) .acf-input select").val();
+	var row1invoice 	= jQuery(".acf-table .acf-row:nth-child(1) td:nth-last-child(3) .acf-input select").val();
+	var row1duration 	= jQuery(".acf-table .acf-row:nth-child(1) td:nth-last-child(4) .acf-input input").val();
+	var row1delivery 	= jQuery(".acf-table .acf-row:nth-child(1) td:nth-last-child(5) .acf-input input").val();
+	var row1start 		= jQuery(".acf-table .acf-row:nth-child(1) td:nth-last-child(6) .acf-input input").val();
+	var row1ticket 		= jQuery(".acf-table .acf-row:nth-child(1) td:nth-last-child(7) .acf-input input").val();
+	var row1work 			= jQuery(".acf-table .acf-row:nth-child(1) td:nth-last-child(8) .acf-input textarea").val();
+	var row1cat 			= jQuery(".acf-table .acf-row:nth-child(1) td:nth-last-child(9) .acf-input select").val();
+
+	var row2billed 		= jQuery(".acf-table .acf-row:nth-child(2) td:nth-last-child(2) .acf-input select").val();
+	var row2invoice 	= jQuery(".acf-table .acf-row:nth-child(2) td:nth-last-child(3) .acf-input select").val();
+	var row2duration 	= jQuery(".acf-table .acf-row:nth-child(2) td:nth-last-child(4) .acf-input input").val();
+	var row2delivery 	= jQuery(".acf-table .acf-row:nth-child(2) td:nth-last-child(5) .acf-input input").val();
+	var row2start 		= jQuery(".acf-table .acf-row:nth-child(2) td:nth-last-child(6) .acf-input input").val();
+	var row2ticket 		= jQuery(".acf-table .acf-row:nth-child(2) td:nth-last-child(7) .acf-input input").val();
+	var row2work 			= jQuery(".acf-table .acf-row:nth-child(2) td:nth-last-child(8) .acf-input textarea").val();
+	var row2cat 			= jQuery(".acf-table .acf-row:nth-child(2) td:nth-last-child(9) .acf-input select").val();
+	
+	var row3billed 		= jQuery(".acf-table .acf-row:nth-child(3) td:nth-last-child(2) .acf-input select").val();
+	var row3invoice 	= jQuery(".acf-table .acf-row:nth-child(3) td:nth-last-child(3) .acf-input select").val();
+	var row3duration 	= jQuery(".acf-table .acf-row:nth-child(3) td:nth-last-child(4) .acf-input input").val();
+	var row3delivery 	= jQuery(".acf-table .acf-row:nth-child(3) td:nth-last-child(5) .acf-input input").val();
+	var row3start 		= jQuery(".acf-table .acf-row:nth-child(3) td:nth-last-child(6) .acf-input input").val();
+	var row3ticket 		= jQuery(".acf-table .acf-row:nth-child(3) td:nth-last-child(7) .acf-input input").val();
+	var row3work 			= jQuery(".acf-table .acf-row:nth-child(3) td:nth-last-child(8) .acf-input textarea").val();
+	var row3cat 			= jQuery(".acf-table .acf-row:nth-child(3) td:nth-last-child(9) .acf-input select").val();
+
+	var row4billed 		= jQuery(".acf-table .acf-row:nth-child(4) td:nth-last-child(2) .acf-input select").val();
+	var row4invoice 	= jQuery(".acf-table .acf-row:nth-child(4) td:nth-last-child(3) .acf-input select").val();
+	var row4duration 	= jQuery(".acf-table .acf-row:nth-child(4) td:nth-last-child(4) .acf-input input").val();
+	var row4delivery 	= jQuery(".acf-table .acf-row:nth-child(4) td:nth-last-child(5) .acf-input input").val();
+	var row4start 		= jQuery(".acf-table .acf-row:nth-child(4) td:nth-last-child(6) .acf-input input").val();
+	var row4ticket 		= jQuery(".acf-table .acf-row:nth-child(4) td:nth-last-child(7) .acf-input input").val();
+	var row4work 			= jQuery(".acf-table .acf-row:nth-child(4) td:nth-last-child(8) .acf-input textarea").val();
+	var row4cat 			= jQuery(".acf-table .acf-row:nth-child(4) td:nth-last-child(9) .acf-input select").val();
+	
+	var row5billed 		= jQuery(".acf-table .acf-row:nth-child(5) td:nth-last-child(2) .acf-input select").val();
+	var row5invoice 	= jQuery(".acf-table .acf-row:nth-child(5) td:nth-last-child(3) .acf-input select").val();
+	var row5duration 	= jQuery(".acf-table .acf-row:nth-child(5) td:nth-last-child(4) .acf-input input").val();
+	var row5delivery 	= jQuery(".acf-table .acf-row:nth-child(5) td:nth-last-child(5) .acf-input input").val();
+	var row5start 		= jQuery(".acf-table .acf-row:nth-child(5) td:nth-last-child(6) .acf-input input").val();
+	var row5ticket 		= jQuery(".acf-table .acf-row:nth-child(5) td:nth-last-child(7) .acf-input input").val();
+	var row5work 			= jQuery(".acf-table .acf-row:nth-child(5) td:nth-last-child(8) .acf-input textarea").val();
+	var row5cat 			= jQuery(".acf-table .acf-row:nth-child(5) td:nth-last-child(9) .acf-input select").val();
+
+	var row6billed 		= jQuery(".acf-table .acf-row:nth-child(6) td:nth-last-child(2) .acf-input select").val();
+	var row6invoice 	= jQuery(".acf-table .acf-row:nth-child(6) td:nth-last-child(3) .acf-input select").val();
+	var row6duration 	= jQuery(".acf-table .acf-row:nth-child(6) td:nth-last-child(4) .acf-input input").val();
+	var row6delivery 	= jQuery(".acf-table .acf-row:nth-child(6) td:nth-last-child(5) .acf-input input").val();
+	var row6start 		= jQuery(".acf-table .acf-row:nth-child(6) td:nth-last-child(6) .acf-input input").val();
+	var row6ticket 		= jQuery(".acf-table .acf-row:nth-child(6) td:nth-last-child(7) .acf-input input").val();
+	var row6work 			= jQuery(".acf-table .acf-row:nth-child(6) td:nth-last-child(8) .acf-input textarea").val();
+	var row6cat 			= jQuery(".acf-table .acf-row:nth-child(6) td:nth-last-child(9) .acf-input select").val();
+		
+	var row7billed 		= jQuery(".acf-table .acf-row:nth-child(7) td:nth-last-child(2) .acf-input select").val();
+	var row7invoice 	= jQuery(".acf-table .acf-row:nth-child(7) td:nth-last-child(3) .acf-input select").val();
+	var row7duration 	= jQuery(".acf-table .acf-row:nth-child(7) td:nth-last-child(4) .acf-input input").val();
+	var row7delivery 	= jQuery(".acf-table .acf-row:nth-child(7) td:nth-last-child(5) .acf-input input").val();
+	var row7start 		= jQuery(".acf-table .acf-row:nth-child(7) td:nth-last-child(6) .acf-input input").val();
+	var row7ticket 		= jQuery(".acf-table .acf-row:nth-child(7) td:nth-last-child(7) .acf-input input").val();
+	var row7work 			= jQuery(".acf-table .acf-row:nth-child(7) td:nth-last-child(8) .acf-input textarea").val();
+	var row7cat 			= jQuery(".acf-table .acf-row:nth-child(7) td:nth-last-child(9) .acf-input select").val();
+
+	var row8billed 		= jQuery(".acf-table .acf-row:nth-child(8) td:nth-last-child(2) .acf-input select").val();
+	var row8invoice 	= jQuery(".acf-table .acf-row:nth-child(8) td:nth-last-child(3) .acf-input select").val();
+	var row8duration 	= jQuery(".acf-table .acf-row:nth-child(8) td:nth-last-child(4) .acf-input input").val();
+	var row8delivery 	= jQuery(".acf-table .acf-row:nth-child(8) td:nth-last-child(5) .acf-input input").val();
+	var row8start 		= jQuery(".acf-table .acf-row:nth-child(8) td:nth-last-child(6) .acf-input input").val();
+	var row8ticket 		= jQuery(".acf-table .acf-row:nth-child(8) td:nth-last-child(7) .acf-input input").val();
+	var row8work 			= jQuery(".acf-table .acf-row:nth-child(8) td:nth-last-child(8) .acf-input textarea").val();
+	var row8cat 			= jQuery(".acf-table .acf-row:nth-child(8) td:nth-last-child(9) .acf-input select").val();
+		
+	var row9billed 		= jQuery(".acf-table .acf-row:nth-child(9) td:nth-last-child(2) .acf-input select").val();
+	var row9invoice 	= jQuery(".acf-table .acf-row:nth-child(9) td:nth-last-child(3) .acf-input select").val();
+	var row9duration 	= jQuery(".acf-table .acf-row:nth-child(9) td:nth-last-child(4) .acf-input input").val();
+	var row9delivery 	= jQuery(".acf-table .acf-row:nth-child(9) td:nth-last-child(5) .acf-input input").val();
+	var row9start 		= jQuery(".acf-table .acf-row:nth-child(9) td:nth-last-child(6) .acf-input input").val();
+	var row9ticket 		= jQuery(".acf-table .acf-row:nth-child(9) td:nth-last-child(7) .acf-input input").val();
+	var row9work 			= jQuery(".acf-table .acf-row:nth-child(9) td:nth-last-child(8) .acf-input textarea").val();
+	var row9cat 			= jQuery(".acf-table .acf-row:nth-child(9) td:nth-last-child(9) .acf-input select").val();
+
+	var row10billed		 		= jQuery(".acf-table .acf-row:nth-child(10) td:nth-last-child(2) .acf-input select").val();
+	var row10invoice 			= jQuery(".acf-table .acf-row:nth-child(10) td:nth-last-child(3) .acf-input select").val();
+	var row10duration 		= jQuery(".acf-table .acf-row:nth-child(10) td:nth-last-child(4) .acf-input input").val();
+	var row10delivery 		= jQuery(".acf-table .acf-row:nth-child(10) td:nth-last-child(5) .acf-input input").val();
+	var row10start 				= jQuery(".acf-table .acf-row:nth-child(10) td:nth-last-child(6) .acf-input input").val();
+	var row10ticket 			= jQuery(".acf-table .acf-row:nth-child(10) td:nth-last-child(7) .acf-input input").val();
+	var row10work 				= jQuery(".acf-table .acf-row:nth-child(10) td:nth-last-child(8) .acf-input textarea").val();
+	var row10cat 					= jQuery(".acf-table .acf-row:nth-child(10) td:nth-last-child(9) .acf-input select").val();
+	console.log(row1start,row2invoice);
+
+ jQuery(".acf-table .acf-row:nth-child(1) td:nth-last-child(2) p.nlc2").html(row1billed); 
+ jQuery(".acf-table .acf-row:nth-child(1) td:nth-last-child(3) p.nlc2").html(row1invoice);
+ jQuery(".acf-table .acf-row:nth-child(1) td:nth-last-child(4) p.nlc2").html(row1duration);
+ jQuery(".acf-table .acf-row:nth-child(1) td:nth-last-child(5) p.nlc2").html(row1delivery);
+ jQuery(".acf-table .acf-row:nth-child(1) td:nth-last-child(6) p.nlc2").html(row1start);  
+ jQuery(".acf-table .acf-row:nth-child(1) td:nth-last-child(7) p.nlc2").html(row1ticket);
+ jQuery(".acf-table .acf-row:nth-child(1) td:nth-last-child(8) p.nlc2").html(row1work);    
+ jQuery(".acf-table .acf-row:nth-child(1) td:nth-last-child(9) p.nlc2").html(row1cat);      
+
+ jQuery(".acf-table .acf-row:nth-child(2) td:nth-last-child(2) p.nlc2").html(row2billed); 
+ jQuery(".acf-table .acf-row:nth-child(2) td:nth-last-child(3) p.nlc2").html(row2invoice);
+ jQuery(".acf-table .acf-row:nth-child(2) td:nth-last-child(4) p.nlc2").html(row2duration);
+ jQuery(".acf-table .acf-row:nth-child(2) td:nth-last-child(5) p.nlc2").html(row2delivery);
+ jQuery(".acf-table .acf-row:nth-child(2) td:nth-last-child(6) p.nlc2").html(row2start);  
+ jQuery(".acf-table .acf-row:nth-child(2) td:nth-last-child(7) p.nlc2").html(row2ticket);
+ jQuery(".acf-table .acf-row:nth-child(2) td:nth-last-child(8) p.nlc2").html(row2work);    
+ jQuery(".acf-table .acf-row:nth-child(2) td:nth-last-child(9) p.nlc2").html(row2cat);      
+
+ jQuery(".acf-table .acf-row:nth-child(3) td:nth-last-child(2) p.nlc2").html(row3billed); 
+ jQuery(".acf-table .acf-row:nth-child(3) td:nth-last-child(3) p.nlc2").html(row3invoice);
+ jQuery(".acf-table .acf-row:nth-child(3) td:nth-last-child(4) p.nlc2").html(row3duration);
+ jQuery(".acf-table .acf-row:nth-child(3) td:nth-last-child(5) p.nlc2").html(row3delivery);
+ jQuery(".acf-table .acf-row:nth-child(3) td:nth-last-child(6) p.nlc2").html(row3start);  
+ jQuery(".acf-table .acf-row:nth-child(3) td:nth-last-child(7) p.nlc2").html(row3ticket);
+ jQuery(".acf-table .acf-row:nth-child(3) td:nth-last-child(8) p.nlc2").html(row3work);    
+ jQuery(".acf-table .acf-row:nth-child(3) td:nth-last-child(9) p.nlc2").html(row3cat);      
+
+ jQuery(".acf-table .acf-row:nth-child(4) td:nth-last-child(2) p.nlc2").html(row4billed); 
+ jQuery(".acf-table .acf-row:nth-child(4) td:nth-last-child(3) p.nlc2").html(row4invoice);
+ jQuery(".acf-table .acf-row:nth-child(4) td:nth-last-child(4) p.nlc2").html(row4duration);
+ jQuery(".acf-table .acf-row:nth-child(4) td:nth-last-child(5) p.nlc2").html(row4delivery);
+ jQuery(".acf-table .acf-row:nth-child(4) td:nth-last-child(6) p.nlc2").html(row4start);  
+ jQuery(".acf-table .acf-row:nth-child(4) td:nth-last-child(7) p.nlc2").html(row4ticket);
+ jQuery(".acf-table .acf-row:nth-child(4) td:nth-last-child(8) p.nlc2").html(row4work);    
+ jQuery(".acf-table .acf-row:nth-child(4) td:nth-last-child(9) p.nlc2").html(row4cat);      
+
+ jQuery(".acf-table .acf-row:nth-child(5) td:nth-last-child(2) p.nlc2").html(row5billed); 
+ jQuery(".acf-table .acf-row:nth-child(5) td:nth-last-child(3) p.nlc2").html(row5invoice);
+ jQuery(".acf-table .acf-row:nth-child(5) td:nth-last-child(4) p.nlc2").html(row5duration);
+ jQuery(".acf-table .acf-row:nth-child(5) td:nth-last-child(5) p.nlc2").html(row5delivery);
+ jQuery(".acf-table .acf-row:nth-child(5) td:nth-last-child(6) p.nlc2").html(row5start);  
+ jQuery(".acf-table .acf-row:nth-child(5) td:nth-last-child(7) p.nlc2").html(row5ticket);
+ jQuery(".acf-table .acf-row:nth-child(5) td:nth-last-child(8) p.nlc2").html(row5work);    
+ jQuery(".acf-table .acf-row:nth-child(5) td:nth-last-child(9) p.nlc2").html(row5cat);      
+
+ jQuery(".acf-table .acf-row:nth-child(6) td:nth-last-child(2) p.nlc2").html(row6billed); 
+ jQuery(".acf-table .acf-row:nth-child(6) td:nth-last-child(3) p.nlc2").html(row6invoice);
+ jQuery(".acf-table .acf-row:nth-child(6) td:nth-last-child(4) p.nlc2").html(row6duration);
+ jQuery(".acf-table .acf-row:nth-child(6) td:nth-last-child(5) p.nlc2").html(row6delivery);
+ jQuery(".acf-table .acf-row:nth-child(6) td:nth-last-child(6) p.nlc2").html(row6start);  
+ jQuery(".acf-table .acf-row:nth-child(6) td:nth-last-child(7) p.nlc2").html(row6ticket);
+ jQuery(".acf-table .acf-row:nth-child(6) td:nth-last-child(8) p.nlc2").html(row6work);    
+ jQuery(".acf-table .acf-row:nth-child(6) td:nth-last-child(9) p.nlc2").html(row6cat);      
+
+ jQuery(".acf-table .acf-row:nth-child(7) td:nth-last-child(2) p.nlc2").html(row7billed); 
+ jQuery(".acf-table .acf-row:nth-child(7) td:nth-last-child(3) p.nlc2").html(row7invoice);
+ jQuery(".acf-table .acf-row:nth-child(7) td:nth-last-child(4) p.nlc2").html(row7duration);
+ jQuery(".acf-table .acf-row:nth-child(7) td:nth-last-child(5) p.nlc2").html(row7delivery);
+ jQuery(".acf-table .acf-row:nth-child(7) td:nth-last-child(6) p.nlc2").html(row7start);  
+ jQuery(".acf-table .acf-row:nth-child(7) td:nth-last-child(7) p.nlc2").html(row7ticket);
+ jQuery(".acf-table .acf-row:nth-child(7) td:nth-last-child(8) p.nlc2").html(row7work);    
+ jQuery(".acf-table .acf-row:nth-child(7) td:nth-last-child(9) p.nlc2").html(row7cat);      
+
+ jQuery(".acf-table .acf-row:nth-child(8) td:nth-last-child(2) p.nlc2").html(row8billed); 
+ jQuery(".acf-table .acf-row:nth-child(8) td:nth-last-child(3) p.nlc2").html(row8invoice);
+ jQuery(".acf-table .acf-row:nth-child(8) td:nth-last-child(4) p.nlc2").html(row8duration);
+ jQuery(".acf-table .acf-row:nth-child(8) td:nth-last-child(5) p.nlc2").html(row8delivery);
+ jQuery(".acf-table .acf-row:nth-child(8) td:nth-last-child(6) p.nlc2").html(row8start);  
+ jQuery(".acf-table .acf-row:nth-child(8) td:nth-last-child(7) p.nlc2").html(row8ticket);
+ jQuery(".acf-table .acf-row:nth-child(8) td:nth-last-child(8) p.nlc2").html(row8work);    
+ jQuery(".acf-table .acf-row:nth-child(8) td:nth-last-child(9) p.nlc2").html(row8cat);      
+
+ jQuery(".acf-table .acf-row:nth-child(9) td:nth-last-child(2) p.nlc2").html(row9billed); 
+ jQuery(".acf-table .acf-row:nth-child(9) td:nth-last-child(3) p.nlc2").html(row9invoice);
+ jQuery(".acf-table .acf-row:nth-child(9) td:nth-last-child(4) p.nlc2").html(row9duration);
+ jQuery(".acf-table .acf-row:nth-child(9) td:nth-last-child(5) p.nlc2").html(row9delivery);
+ jQuery(".acf-table .acf-row:nth-child(9) td:nth-last-child(6) p.nlc2").html(row9start);  
+ jQuery(".acf-table .acf-row:nth-child(9) td:nth-last-child(7) p.nlc2").html(row9ticket);
+ jQuery(".acf-table .acf-row:nth-child(9) td:nth-last-child(8) p.nlc2").html(row9work);    
+ jQuery(".acf-table .acf-row:nth-child(9) td:nth-last-child(9) p.nlc2").html(row9cat);      
+
+ jQuery(".acf-table .acf-row:nth-child(10) td:nth-last-child(2) p.nlc2").html(row10billed); 
+ jQuery(".acf-table .acf-row:nth-child(10) td:nth-last-child(3) p.nlc2").html(row10invoice);
+ jQuery(".acf-table .acf-row:nth-child(10) td:nth-last-child(4) p.nlc2").html(row10duration);
+ jQuery(".acf-table .acf-row:nth-child(10) td:nth-last-child(5) p.nlc2").html(row10delivery);
+ jQuery(".acf-table .acf-row:nth-child(10) td:nth-last-child(6) p.nlc2").html(row10start);  
+ jQuery(".acf-table .acf-row:nth-child(10) td:nth-last-child(7) p.nlc2").html(row10ticket);
+ jQuery(".acf-table .acf-row:nth-child(10) td:nth-last-child(8) p.nlc2").html(row10work);    
+ jQuery(".acf-table .acf-row:nth-child(10) td:nth-last-child(9) p.nlc2").html(row10cat);      
+ 
+});
+
+// function displayVals() {
+//   		var singleValues = jQuery( "td:nth-last-child(2) .acf-input select" ).val();
+//   		jQuery( "td:nth-last-child(2) p.nlc2" ).html(singleValues);
+// };
+ 
+// jQuery( "td:nth-last-child(2) .acf-input select" ).change(function(){
+// 	var singleValues = jQuery( this ).val();
+// 	jQuery(this).parent().find('p.nlc2').html(singleValues);
+// });
+
+ 	jQuery(this).find("td:last-child .acf-icon.-minus").after("<a class='acf-rio-edit' id='edit-ed-" + i + "'>e</a>");
+
+jQuery(this).find("a#edit-ed-" + i).click(function (e) {
+    e.preventDefault();
+    var func = jQuery(this).hasClass('active') ? 'removeClass' : 'addClass';
+    jQuery("a#edit-ed-" + i).removeClass("active");
+    jQuery(this)[func]("active");
+});
+	 var valOp1 = jQuery("a#edit-ed-" + i + ".active");
+	 console.log("a#edit-ed-" + i + ".active");
+	 if ( valOp1 == true ){
+		 jQuery(this).find(".acf-input").show();
+		 console.log("Show");
+	 }else{
+		 jQuery(this).find(".acf-input").hide();
+		 console.log("Hide");
+	 }
+

@@ -1,0 +1,99 @@
+cite.tc-blue {
+  color: blue;
+  font-size: smaller;
+  padding: 2px 5px;
+  background-color: rgb(255, 255, 0);
+  border-radius: 3px;
+}
+
+span.block-note {
+  display: block;
+  padding: 5px 7px;
+  text-align: center;
+  color: red;
+  font-weight: bold;
+}
+
+span.qa-detail {
+  background-color: #0085BA;
+  color: white;
+  display: block;
+  padding: 5px;
+  border-radius: 2px;
+}
+
+h4.qa-test {
+  color: #052F3A;
+  font-size: 1.3em;
+  font-weight: 500;
+}
+
+.acf-wp-4 .hndle.ui-sortable-handle a {
+  display: none;
+  opacity: 0;
+  z-index: -9999;
+}
+
+.acf-postbox .hndle:hover .acf-hndle-cog,
+.acf-postbox .hndle.hover .acf-hndle-cog {}
+
+.ew-link {
+  font-size: 10px;
+  cursor: pointer;
+  color: wheat;
+  padding: 3px 5px;
+  background-color: #433A3A;
+  border-radius: 3px;
+  vertical-align: bottom;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.ew-link:hover {
+  color: white;
+}
+
+.acf-table>thead>tr>th:nth-child(9) {
+  width: 70px !important;
+}
+
+.acf-table>thead>tr>th:nth-child(5),
+.acf-table>thead>tr>th:nth-child(6),
+.acf-table>thead>tr>th:nth-child(8) {
+  width: 90px !important;
+}
+
+.acf-table>thead>tr>th:nth-child(2) {
+  width: 100px !important;
+}
+
+.acf-table>thead>tr>th:nth-child(4) {
+  width: 100px !important;
+}
+
+.acf-table>thead>tr>th:nth-child(7) {
+  width: 70px !important;
+}
+
+.acf-table>thead>tr>th:nth-child(3) {
+  width: auto !important;
+}
+
+a.acf-rio-edit {
+  position: absolute;
+  top: 0px;
+  color: white;
+  background-color: #0085BA;
+  border-radius: 0px 1px 0px 8px;
+  left: -56%;
+  padding: 0px 5px;
+  cursor: pointer;
+}
+
+a.acf-rio-edit:hover {
+  color: white;
+  background-color: #D54E21;
+}
