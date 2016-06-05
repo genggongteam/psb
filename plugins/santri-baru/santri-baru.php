@@ -16,6 +16,7 @@
  * ============================================
  * */
 // Include ACF
+date_default_timezone_set('Asia/Jakarta');
 include 'acf-addons/acf.php';
 
 // Hide ACF field group menu item
@@ -289,4 +290,40 @@ add_action('init', 'pondok_taxonomy', 0);
  * --- Metabox Form
  * ============================================
  * */
+
+// Disable No Induk Field
+// function disable_noinduk_field( $field ) {
+    
+//     if( $field['value'] ) {
+        
+//         $field['disabled'] = true;
+        
+//     }
+
+//     return $field;
+    
+// }
+// add_filter('acf/prepare_field/name=no_induk_auto', 'disable_noinduk_field');
+
+// No Induk Generator
+function nomer_induk( $field ) {
+        
+     $myno_induk = date("Y").date("m").wp_count_posts('santri_baru')->publish+1;
+        
+     $field['default_value'] = $myno_induk;
+     return $field;
+         
+}
+add_filter('acf/load_field/name=no_induk_auto', 'nomer_induk');
+// Tanggal Daftar
+function tanggal_daftar( $field ) {
+        
+     $tgl_dft = date("d")."/".date("m")."/".date("Y");      
+     $field['default_value'] = $tgl_dft;
+     return $field;
+         
+}
+
+add_filter('acf/load_field/name=tgl_daftar', 'tanggal_daftar');
+
 include 'mb-projects.php';
