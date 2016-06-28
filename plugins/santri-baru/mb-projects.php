@@ -458,20 +458,6 @@ acf_add_local_field_group(array (
 			'type' => 'number',
 			'instructions' => '',
 			'required' => 0,
-			'conditional_logic' => array (
-				array (
-					array (
-						'field' => 'field_5726652d3775f',
-						'operator' => '!=',
-						'value' => '1',
-					),
-				),
-			),
-			'wrapper' => array (
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
 			'default_value' => '',
 			'placeholder' => '',
 			'prepend' => '',

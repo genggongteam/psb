@@ -1,0 +1,13 @@
+{
+  "name": "_s",
+  "homepage": "https://github.com/Automattic/_s",
+  "_release": "05865aae73",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "05865aae73f6418d0c93d0e7cee94a055cd74865"
+  },
+  "_source": "https://github.com/Automattic/_s.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/Automattic/_s.git"
+}

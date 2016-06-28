@@ -17,16 +17,15 @@ require get_template_directory() . '/inc/setup.php';
  */
 require get_template_directory() . '/inc/widgets.php';
 
+/**
+* Load functions to secure your WP install.
+*/
+require get_template_directory() . '/inc/security.php';
 
 /**
  * Enqueue scripts and styles.
  */
 require get_template_directory() . '/inc/enqueue.php';
-
-/**
- * Implement the Custom Header feature.
- */
-//require get_template_directory() . '/inc/custom-header.php';
 
 /**
  * Custom template tags for this theme.
@@ -57,6 +56,12 @@ require get_template_directory() . '/inc/jetpack.php';
 * Load custom WordPress nav walker.
 */
 require get_template_directory() . '/inc/bootstrap-wp-navwalker.php';
+
+/**
+* Load custom WordPress gallery.
+*/
+require get_template_directory() . '/inc/bootstrap-wp-gallery.php';
+
 
 /**
 * Load WooCommerce functions.

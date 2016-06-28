@@ -86,26 +86,31 @@ gulp.task('watch-bs', ['browser-sync', 'watch', 'cssnano'], function () { });
 gulp.task('scripts', function() {
   gulp.src([
     basePaths.dev + 'js/owl.carousel.min.js', // Must be loaded before BS4
+    basePaths.dev + 'js/tether.js', // Must be loaded before BS4
 
     // Start - All BS4 stuff
     basePaths.dev + 'js/bootstrap4/bootstrap.js', 
-    //basePaths.dev + 'js/bootstrap4/umd/util.js', 
-    //basePaths.dev + 'js/bootstrap4/umd/alert.js',  
-    //basePaths.dev + 'js/bootstrap4/umd/button.js', 
-    //basePaths.dev + 'js/bootstrap4/umd/carousel.js',
-    //basePaths.dev + 'js/bootstrap4/umd/collapse.js',
-    //basePaths.dev + 'js/bootstrap4/umd/dropdown.js',  
-    //basePaths.dev + 'js/bootstrap4/umd/modal.js', 
-    //basePaths.dev + 'js/bootstrap4/umd/scrollspy.js',   
-    //basePaths.dev + 'js/bootstrap4/umd/tab.js', 
-    //basePaths.dev + 'js/bootstrap4/umd/tooltip.js',
-    //basePaths.dev + 'js/bootstrap4/umd/popover.js', 
+
     // End - All BS4 stuff
 
     basePaths.dev + 'js/skip-link-focus-fix.js'
     ])
     .pipe(concat('theme.min.js'))
     .pipe(uglify())
+    .pipe(gulp.dest('./js/'));
+
+  gulp.src([
+    basePaths.dev + 'js/owl.carousel.min.js', // Must be loaded before BS4
+    basePaths.dev + 'js/tether.js', // Must be loaded before BS4
+
+    // Start - All BS4 stuff
+    basePaths.dev + 'js/bootstrap4/bootstrap.js', 
+
+    // End - All BS4 stuff
+
+    basePaths.dev + 'js/skip-link-focus-fix.js'
+    ])
+    .pipe(concat('theme.js'))
     .pipe(gulp.dest('./js/'));
 });
 
@@ -115,19 +120,7 @@ gulp.task('scripts', function() {
 
 
 ////////////////// All Bootstrap SASS  Assets /////////////////////////
-// Copy all Bootstrap JS files 
 gulp.task('copy-assets', function() {
-    gulp.src(basePaths.bower + 'bootstrap-sass/assets/javascripts/**/*.js')
-       .pipe(gulp.dest(basePaths.dev + '/js/bootstrap3'));
-
-// Copy all Bootstrap SCSS files
-    gulp.src(basePaths.bower + 'bootstrap-sass/assets/stylesheets/**/*.scss')
-       .pipe(gulp.dest(basePaths.dev + '/sass/bootstrap3'));
-
-// Copy all Bootstrap Fonts
-    gulp.src(basePaths.bower + 'bootstrap-sass/assets/fonts/bootstrap/*.{ttf,woff,woff2,eof,svg}')
-        .pipe(gulp.dest('./fonts'));
-////////////////// End Bootstrap 3 Assets /////////////////////////
 
 
 ////////////////// All Bootstrap 4 Assets /////////////////////////
