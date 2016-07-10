@@ -6,6 +6,7 @@
  */
 
 function understrap_scripts() {
+    wp_enqueue_style( 'web-google-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700', false );
     wp_enqueue_style( 'understrap-styles', get_stylesheet_directory_uri() . '/css/theme.min.css', array(), '0.4.5');
     wp_enqueue_script('jquery'); 
     wp_enqueue_script( 'understrap-scripts', get_template_directory_uri() . '/js/theme.min.js', array(), '0.4.5', true );
@@ -16,6 +17,15 @@ function understrap_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', 'understrap_scripts' );
+
+
+function wpb_add_google_fonts() {
+
+wp_enqueue_style( 'wpb-google-fonts', 'http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,700,300', false ); 
+}
+
+add_action( 'wp_enqueue_scripts', 'wpb_add_google_fonts' );
+
 
 /** 
 *Loading slider script conditionally

@@ -14,7 +14,7 @@ var browserSyncWatchFiles = [
 // browser-sync options
 // see: https://www.browsersync.io/docs/options/
 var browserSyncOptions = {
-    proxy: "localhost/theme_test/",
+    proxy: "wecode.dev/psb",
     notify: false
 };
 
