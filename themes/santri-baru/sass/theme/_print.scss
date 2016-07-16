@@ -1,0 +1,33 @@
+@media print {
+	body{
+		font-size: 12pt;
+	}
+	.onlyprint{
+		display: block;
+	}
+	#header,#footer,h2.entry-title,.hidden-print{
+		display: none;
+	}
+	.table-single-santri{
+		vertical-align: top !important;
+		p{
+			margin: 0;
+		}
+	}
+	.logo-print{
+		height: 100px;
+		width: auto;
+	}
+	@page {
+        size: auto;   /* auto is the initial value */
+        margin: 0mm;  /* this affects the margin in the printer settings */
+    }
+    .title-formulir{
+    	position: absolute;
+    	left: 150px;
+    	top: 45px;
+    }
+    .text-muted{
+    	opacity: 0.5;
+    }
+}

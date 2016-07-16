@@ -6965,3 +6965,37 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700; }
+
+.onlyprint {
+  display: none; }
+
+.table-single-santri {
+  vertical-align: top !important; }
+  .table-single-santri tr td {
+    vertical-align: top; }
+
+@media print {
+  body {
+    font-size: 12pt; }
+  .onlyprint {
+    display: block; }
+  #header, #footer, h2.entry-title, .hidden-print {
+    display: none; }
+  .table-single-santri {
+    vertical-align: top !important; }
+    .table-single-santri p {
+      margin: 0; }
+  .logo-print {
+    height: 100px;
+    width: auto; }
+  @page {
+    size: auto;
+    /* auto is the initial value */
+    margin: 0mm;
+    /* this affects the margin in the printer settings */ }
+  .title-formulir {
+    position: absolute;
+    left: 150px;
+    top: 45px; }
+  .text-muted {
+    opacity: 0.5; } }

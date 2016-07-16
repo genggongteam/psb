@@ -5,3 +5,14 @@ body{
 h1,h2,h3,h4,h5,h6{
 	font-weight: 700;
 }
+
+// Media Print
+.onlyprint{
+	display: none;
+}
+.table-single-santri{
+	vertical-align: top !important;
+	tr td{
+		vertical-align: top;
+	}
+}
