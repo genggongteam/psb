@@ -28,33 +28,96 @@ class URE_Protect_Admin {
         add_filter('views_users', array($this, 'exclude_admins_view'));       
     }
     // end of __construct()
-    
+
+
+    // apply protection to the user edit pages only
 
     /**
      * exclude administrator role from the roles list
-     * 
+     *
      * @param string $roles
      * @return array
      */
     public function exclude_admin_role($roles) {
 
-        if (isset($roles['administrator'])) {
+        if ($this->is_protection_applicable() && isset($roles['administrator'])) {
             unset($roles['administrator']);
         }
 
         return $roles;
     }
+
+    // end of is_protection_applicable()
+
+    protected function is_protection_applicable()
+    {
+        $result = false;
+        $links_to_block = array('profile.php', 'users.php', 'user-new.php');
+        foreach ($links_to_block as $key => $value) {
+            $result = stripos($_SERVER['REQUEST_URI'], $value);
+            if ($result !== false) {
+                break;
+            }
+        }
+
+        return $result;
+    }
     // end of exclude_admin_role()
     
-    
-        /**
+    /**
+     * We have two vulnerable queries with user id at admin interface, which should be processed
+     * 1st: http://blogdomain.com/wp-admin/user-edit.php?user_id=ID&wp_http_referer=%2Fwp-admin%2Fusers.php
+     * 2nd: http://blogdomain.com/wp-admin/users.php?action=delete&user=ID&_wpnonce=ab34225a78
+     * If put Administrator user ID into such request, user with lower capabilities (if he has 'edit_users')
+     * can edit, delete admin record
+     * This function removes 'edit_users' capability from current user capabilities
+     * if request has admin user ID in it
+     *
+     * @param array $allcaps
+     * @param type $caps
+     * @param string $name
+     * @return array
+     */
+    public function not_edit_admin($allcaps, $caps, $name) {
+
+        $user_keys = array('user_id', 'user');
+        foreach ($user_keys as $user_key) {
+            $access_deny = false;
+            $user_id = $this->lib->get_request_var($user_key, 'get');
+            if (empty($user_id)) {
+                break;
+            }
+            if ($user_id == 1) {  // built-in WordPress Admin
+                $access_deny = true;
+            } else {
+                if (!isset($this->user_to_check[$user_id])) {
+                    // check if user_id has Administrator role
+                    $access_deny = $this->has_administrator_role($user_id);
+                } else {
+                    // user_id was checked already, get result from cash
+                    $access_deny = $this->user_to_check[$user_id];
+                }
+            }
+            if ($access_deny) {
+                unset($allcaps['edit_users']);
+            }
+            break;
+        }
+
+        return $allcaps;
+    }
+
+    // end of has_administrator_role()
+
+    /**
      * Check if user has "Administrator" role assigned
-     * 
+     *
      * @global wpdb $wpdb
      * @param int $user_id
      * @return boolean returns true is user has Role "Administrator"
      */
-    private function has_administrator_role($user_id) {
+    private function has_administrator_role($user_id)
+    {
         global $wpdb;
 
         if (empty($user_id) || !is_numeric($user_id)) {
@@ -77,54 +140,7 @@ class URE_Protect_Admin {
 
         return $result;
     }
-
-    // end of has_administrator_role()
-    
-    
-    /**
-     * We have two vulnerable queries with user id at admin interface, which should be processed
-     * 1st: http://blogdomain.com/wp-admin/user-edit.php?user_id=ID&wp_http_referer=%2Fwp-admin%2Fusers.php
-     * 2nd: http://blogdomain.com/wp-admin/users.php?action=delete&user=ID&_wpnonce=ab34225a78
-     * If put Administrator user ID into such request, user with lower capabilities (if he has 'edit_users')
-     * can edit, delete admin record
-     * This function removes 'edit_users' capability from current user capabilities
-     * if request has admin user ID in it
-     *
-     * @param array $allcaps
-     * @param type $caps
-     * @param string $name
-     * @return array
-     */
-    public function not_edit_admin($allcaps, $caps, $name) {
-        
-        $user_keys = array('user_id', 'user');
-        foreach ($user_keys as $user_key) {
-            $access_deny = false;
-            $user_id = $this->lib->get_request_var($user_key, 'get');
-            if (empty($user_id)) {
-                break;
-            }
-            if ($user_id == 1) {  // built-in WordPress Admin
-                $access_deny = true;
-            } else {
-                if (!isset($this->user_to_check[$user_id])) {
-                    // check if user_id has Administrator role
-                    $access_deny = $this->has_administrator_role($user_id);
-                } else {
-                    // user_id was checked already, get result from cash
-                    $access_deny = $this->user_to_check[$user_id];
-                }
-            }
-            if ($access_deny) {
-                unset($allcaps['edit_users']);
-            }
-            break;            
-        }
-
-        return $allcaps;
-    }
     // end of not_edit_admin()
-    
     
     /**
      * add where criteria to exclude users with 'Administrator' role from users list
@@ -136,16 +152,7 @@ class URE_Protect_Admin {
 
         global $wpdb;
 
-        $result = false;
-        $links_to_block = array('profile.php', 'users.php');
-        foreach ($links_to_block as $key => $value) {
-            $result = stripos($_SERVER['REQUEST_URI'], $value);
-            if ($result !== false) {
-                break;
-            }
-        }
-
-        if ($result === false) { // block the user edit stuff only
+        if (!$this->is_protection_applicable()) { // block the user edit stuff only
             return;
         }
 

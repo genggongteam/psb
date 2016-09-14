@@ -62,7 +62,9 @@ class acf_field_email extends acf_field {
 	function render_field( $field ) {
 		
 		// vars
+        $atts = array();
 		$o = array( 'type', 'id', 'class', 'name', 'value', 'placeholder' );
+        $s = array('readonly', 'disabled');
 		$e = '';
 		
 		
@@ -82,15 +84,22 @@ class acf_field_email extends acf_field {
 			$e .= '<div class="acf-input-append">' . $field['append'] . '</div>';
 			
 		}
-		
-		
-		// populate atts
-		$atts = array();
+
+
+        // append atts
 		foreach( $o as $k ) {
 		
 			$atts[ $k ] = $field[ $k ];	
 			
 		}
+
+
+        // append special atts
+        foreach ($s as $k) {
+
+            if (!empty($field[$k])) $atts[$k] = $k;
+
+        }
 		
 		
 		// render
@@ -158,8 +167,10 @@ class acf_field_email extends acf_field {
 	
 }
 
-new acf_field_email();
 
-endif;
+// initialize
+    acf_register_field_type(new acf_field_email());
+
+endif; // class_exists check
 
 ?>

@@ -46,7 +46,7 @@ class acf_field_file extends acf_field {
 			'select'		=> __("Select File",'acf'),
 			'edit'			=> __("Edit File",'acf'),
 			'update'		=> __("Update File",'acf'),
-			'uploadedTo'	=> __("uploaded to this post",'acf'),
+            'uploadedTo' => __("Uploaded to this post", 'acf'),
 		);
 		
 		
@@ -91,9 +91,9 @@ class acf_field_file extends acf_field {
 		$o = array(
 			'icon'		=> '',
 			'title'		=> '',
-			'size'		=> '',
 			'url'		=> '',
-			'name'		=> '',
+            'filesize' => '',
+            'filename' => '',
 		);
 		
 		$div = array(
@@ -102,27 +102,33 @@ class acf_field_file extends acf_field {
 			'data-mime_types'	=> $field['mime_types'],
 			'data-uploader'		=> $uploader
 		);
-		
-		
-		// has value
-		if( $field['value'] && is_numeric($field['value']) ) {
+
+
+        // has value?
+        if ($field['value']) {
 			
 			$file = get_post( $field['value'] );
 			
 			if( $file ) {
 				
-				$div['class'] .= ' has-value';
-				
 				$o['icon'] = wp_mime_type_icon( $file->ID );
 				$o['title']	= $file->post_title;
-				$o['size'] = @size_format(filesize( get_attached_file( $file->ID ) ));
+                $o['filesize'] = @size_format(filesize(get_attached_file($file->ID)));
 				$o['url'] = wp_get_attachment_url( $file->ID );
 				
 				$explode = explode('/', $o['url']);
-				$o['name'] = end( $explode );	
+                $o['filename'] = end($explode);
 							
 			}
-			
+
+
+            // url exists
+            if ($o['url']) {
+
+                $div['class'] .= ' has-value';
+
+            }
+						
 		}
 				
 ?>
@@ -139,12 +145,13 @@ class acf_field_file extends acf_field {
 				<strong data-name="title"><?php echo $o['title']; ?></strong>
 			</p>
 			<p>
-				<strong><?php _e('File Name', 'acf'); ?>:</strong>
-				<a data-name="name" href="<?php echo $o['url']; ?>" target="_blank"><?php echo $o['name']; ?></a>
+                <strong><?php _e('File name', 'acf'); ?>:</strong>
+                <a data-name="filename" href="<?php echo $o['url']; ?>"
+                   target="_blank"><?php echo $o['filename']; ?></a>
 			</p>
 			<p>
-				<strong><?php _e('File Size', 'acf'); ?>:</strong>
-				<span data-name="size"><?php echo $o['size']; ?></span>
+                <strong><?php _e('File size', 'acf'); ?>:</strong>
+                <span data-name="filesize"><?php echo $o['filesize']; ?></span>
 			</p>
 			
 			<ul class="acf-hl acf-soh-target">
@@ -165,8 +172,10 @@ class acf_field_file extends acf_field {
 			<input type="file" name="<?php echo $field['name']; ?>" id="<?php echo $field['id']; ?>" />
 			
 		<?php else: ?>
-			
-			<p style="margin:0;"><?php _e('No File selected','acf'); ?> <a data-name="add" class="acf-button button" href="#"><?php _e('Add File','acf'); ?></a></p>
+
+            <p style="margin:0;"><?php _e('No file selected', 'acf'); ?> <a data-name="add" class="acf-button button"
+                                                                            href="#"><?php _e('Add File', 'acf'); ?></a>
+            </p>
 			
 		<?php endif; ?>
 		
@@ -290,19 +299,11 @@ class acf_field_file extends acf_field {
 	function format_value( $value, $post_id, $field ) {
 		
 		// bail early if no value
-		if( empty($value) ) {
-		
-			return false;
-			
-		}
+        if (empty($value)) return false;
 		
 		
 		// bail early if not numeric (error message)
-		if( !is_numeric($value) ) {
-			
-			return false;
-				
-		}
+        if (!is_numeric($value)) return false;
 		
 		
 		// convert to int
@@ -344,58 +345,55 @@ class acf_field_file extends acf_field {
 	    return($vars);
 	    
 	}
-	   	
-	
-	/*
-	*  update_value()
-	*
-	*  This filter is appied to the $value before it is updated in the db
-	*
-	*  @type	filter
-	*  @since	3.6
-	*  @date	23/01/13
-	*
-	*  @param	$value - the value which will be saved in the database
-	*  @param	$post_id - the $post_id of which the value will be saved
-	*  @param	$field - the field array holding all the field options
-	*
-	*  @return	$value - the modified value
-	*/
+
+
+    /*
+    *  update_value()
+    *
+    *  This filter is appied to the $value before it is updated in the db
+    *
+    *  @type	filter
+    *  @since	3.6
+    *  @date	23/01/13
+    *
+    *  @param	$value - the value which will be saved in the database
+    *  @param	$post_id - the $post_id of which the value will be saved
+    *  @param	$field - the field array holding all the field options
+    *
+    *  @return	$value - the modified value
+    */
 	
 	function update_value( $value, $post_id, $field ) {
-		
-		// array?
-		if( is_array($value) && isset($value['ID']) ) {
-		
-			return $value['ID'];	
-			
-		}
-		
-		
-		// object?
-		if( is_object($value) && isset($value->ID) ) {
-		
-			return $value->ID;
-			
-		}
+
+        // numeric
+        if (is_numeric($value)) return $value;
+
+
+        // array?
+        if (is_array($value) && isset($value['ID'])) return $value['ID'];
+
+
+        // object?
+        if (is_object($value) && isset($value->ID)) return $value->ID;
 		
 		
 		// return
 		return $value;
-	}
-	
-	
-	/*
-	*  wp_prepare_attachment_for_js
-	*
-	*  this filter allows ACF to add in extra data to an attachment JS object
-	*
-	*  @type	function
-	*  @date	1/06/13
-	*
-	*  @param	{int}	$post_id
-	*  @return	{int}	$post_id
-	*/
+
+    }
+
+
+    /*
+    *  wp_prepare_attachment_for_js
+    *
+    *  this filter allows ACF to add in extra data to an attachment JS object
+    *
+    *  @type	function
+    *  @date	1/06/13
+    *
+    *  @param	{int}	$post_id
+    *  @return	{int}	$post_id
+    */
 	
 	function wp_prepare_attachment_for_js( $response, $attachment, $meta ) {
 		
@@ -422,8 +420,10 @@ class acf_field_file extends acf_field {
 	
 }
 
-new acf_field_file();
 
-endif;
+// initialize
+    acf_register_field_type(new acf_field_file());
+
+endif; // class_exists check
 
 ?>

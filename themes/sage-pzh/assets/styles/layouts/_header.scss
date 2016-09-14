@@ -1,0 +1,9 @@
+.navbar {
+  &.navbar-santri {
+    background: $dark-green;
+    color: white;
+    a {
+      color: white;
+    }
+  }
+}

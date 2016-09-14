@@ -63,12 +63,14 @@ class acf_field_password extends acf_field {
 	function render_field( $field ) {
 		
 		// vars
+        $atts = array();
 		$o = array( 'type', 'id', 'class', 'name', 'value', 'placeholder' );
+        $s = array('readonly', 'disabled');
 		$e = '';
 		
 		
 		// prepend
-		if( $field['prepend'] !== "" ) {
+        if ($field['prepend'] !== '') {
 		
 			$field['class'] .= ' acf-is-prepended';
 			$e .= '<div class="acf-input-prepend">' . $field['prepend'] . '</div>';
@@ -77,31 +79,26 @@ class acf_field_password extends acf_field {
 		
 		
 		// append
-		if( $field['append'] !== "" ) {
+        if ($field['append'] !== '') {
 		
 			$field['class'] .= ' acf-is-appended';
 			$e .= '<div class="acf-input-append">' . $field['append'] . '</div>';
 			
 		}
-		
-		
-		// populate atts
-		$atts = array();
+
+
+        // append atts
 		foreach( $o as $k ) {
 		
 			$atts[ $k ] = $field[ $k ];	
 			
 		}
-		
-		
-		// special atts
-		foreach( array( 'readonly', 'disabled' ) as $k ) {
-		
-			if( $field[ $k ] ) {
-			
-				$atts[ $k ] = $k;
-				
-			}
+
+
+        // append special atts
+        foreach ($s as $k) {
+
+            if (!empty($field[$k])) $atts[$k] = $k;
 			
 		}
 		
@@ -161,8 +158,10 @@ class acf_field_password extends acf_field {
 	
 }
 
-new acf_field_password();
 
-endif;
+// initialize
+    acf_register_field_type(new acf_field_password());
+
+endif; // class_exists check
 
 ?>

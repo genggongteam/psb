@@ -11,10 +11,10 @@ $json = acf_extract_var( $args, 'json');
 	<div class="add-ons-list acf-cf">
 		
 		<?php if( !empty($json) ): ?>
-			
-			<?php foreach( $json as $addon ): 
-				
-				$addon = acf_parse_args($addon, array(
+
+            <?php foreach ($json as $addon):
+
+                $addon = wp_parse_args($addon, array(
 					"title"			=> "",
 			        "slug"			=> "",
 			        "description"	=> "",

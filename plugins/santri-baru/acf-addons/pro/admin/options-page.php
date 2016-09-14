@@ -28,7 +28,8 @@ class acf_pro_options_page {
 		add_filter( 'acf/location/rule_types', 					array($this, 'rule_types'), 10, 1 );
 		add_filter( 'acf/location/rule_values/options_page',	array($this, 'rule_values'), 10, 1 );
 		add_filter( 'acf/location/rule_match/options_page',		array($this, 'rule_match'), 10, 3 );
-	}
+
+    }
 		
 	
 	/*
@@ -48,7 +49,8 @@ class acf_pro_options_page {
 	    $choices[ __("Forms",'acf') ]['options_page'] = __("Options Page",'acf');
 		
 	    return $choices;
-	}
+
+    }
 	
 	
 	/*
@@ -244,8 +246,34 @@ class acf_pro_options_page {
 		
 		
 		// actions
+        add_action('acf/input/admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
 		add_action( 'acf/input/admin_head',		array($this,'admin_head') );
-	
+
+
+        // add columns support
+        add_screen_option('layout_columns', array('max' => 2, 'default' => 2));
+
+    }
+
+
+    /*
+    *  admin_enqueue_scripts
+    *
+    *  This function will enqueue the 'post.js' script which adds support for 'Screen Options' column toggle
+    *
+    *  @type	function
+    *  @date	23/03/2016
+    *  @since	5.3.2
+    *
+    *  @param	$post_id (int)
+    *  @return	$post_id (int)
+    */
+
+    function admin_enqueue_scripts()
+    {
+
+        wp_enqueue_script('post');
+		
 	}
 	
 	
@@ -276,8 +304,13 @@ class acf_pro_options_page {
 			acf_add_admin_notice( __("Options Updated",'acf') );
 			
 		}
-		
-		if( empty($field_groups) ) {
+
+
+        // add submit div
+        add_meta_box('submitdiv', __('Publish', 'acf'), array($this, 'postbox_submitdiv'), 'acf_options_page', 'side', 'high');
+
+
+        if( empty($field_groups) ) {
 		
 			acf_add_admin_notice(__("No Custom Field Groups found for this options page",'acf') . '. <a href="' . admin_url() . 'post-new.php?post_type=acf-field-group">' . __("Create a Custom Field Group",'acf') . '</a>', 'error');
 		
@@ -310,7 +343,7 @@ class acf_pro_options_page {
 				
 				
 				// add meta box
-				add_meta_box( $id, $title, array($this, 'render_meta_box'), 'acf_options_page', $context, $priority, $args );
+                add_meta_box($id, $title, array($this, 'postbox_acf'), 'acf_options_page', $context, $priority, $args);
 				
 				
 			}
@@ -323,19 +356,53 @@ class acf_pro_options_page {
 	
 	
 	/*
-	*  render_meta_box
+	*  postbox_submitdiv
 	*
-	*  description
+	*  This function will render the submitdiv metabox
 	*
 	*  @type	function
-	*  @date	24/02/2014
-	*  @since	5.0.0
+	*  @date	23/03/2016
+	*  @since	5.3.2
 	*
 	*  @param	$post_id (int)
 	*  @return	$post_id (int)
 	*/
-	
-	function render_meta_box( $post, $args ) {
+
+    function postbox_submitdiv($post, $args)
+    {
+
+        ?>
+        <div id="major-publishing-actions">
+
+            <div id="publishing-action">
+                <span class="spinner"></span>
+                <input type="submit" accesskey="p" value="<?php echo $this->page['update_button']; ?>"
+                       class="button button-primary button-large" id="publish" name="publish">
+            </div>
+
+            <div class="clear"></div>
+
+        </div>
+        <?php
+
+    }
+
+
+    /*
+    *  render_meta_box
+    *
+    *  description
+    *
+    *  @type	function
+    *  @date	24/02/2014
+    *  @since	5.0.0
+    *
+    *  @param	$post_id (int)
+    *  @return	$post_id (int)
+    */
+
+    function postbox_acf($post, $args)
+    {
 		
 		// extract args
 		extract( $args ); // all variables from the add_meta_box function

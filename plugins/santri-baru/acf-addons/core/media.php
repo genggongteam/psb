@@ -20,11 +20,12 @@ class acf_media {
 		
 		// actions
 		add_action('acf/save_post', 				array($this, 'save_files'), 5, 1);
-		add_action('acf/input/admin_footer_js', 	array($this, 'admin_footer_js'));
+        add_action('acf/input/admin_footer', array($this, 'admin_footer'));
 		
 		
 		// filters
 		add_filter('wp_handle_upload_prefilter', 	array($this, 'handle_upload_prefilter'), 10, 1);
+        add_filter('acf/input/admin_l10n', array($this, 'acf_input_admin_l10n'), 10, 1);
 		
 		
 		// ajax
@@ -34,17 +35,49 @@ class acf_media {
 	
 	
 	/*
-	*  handle_upload_prefilter
+	*  acf_input_admin_l10n
 	*
-	*  description
+	*  This function will append l10n strings for JS use
 	*
 	*  @type	function
-	*  @date	16/02/2015
-	*  @since	5.1.5
+	*  @date	11/04/2016
+	*  @since	5.3.8
 	*
 	*  @param	$post_id (int)
 	*  @return	$post_id (int)
 	*/
+
+    function acf_input_admin_l10n($l10n)
+    {
+
+        // append
+        $l10n['media'] = array(
+            'select' => _x('Select', 'verb', 'acf'),
+            'edit' => _x('Edit', 'verb', 'acf'),
+            'update' => _x('Update', 'verb', 'acf'),
+            'uploadedTo' => __("Uploaded to this post", 'acf'),
+            'default_icon' => wp_mime_type_icon()
+        );
+
+
+        // return
+        return $l10n;
+
+    }
+
+
+    /*
+    *  handle_upload_prefilter
+    *
+    *  description
+    *
+    *  @type	function
+    *  @date	16/02/2015
+    *  @since	5.1.5
+    *
+    *  @param	$post_id (int)
+    *  @return	$post_id (int)
+    */
 	
 	function handle_upload_prefilter( $file ) {
 		
@@ -121,7 +154,7 @@ class acf_media {
 	
 	
 	/*
-	*  admin_footer_js
+	*  admin_footer
 	*
 	*  description
 	*
@@ -132,11 +165,15 @@ class acf_media {
 	*  @param	$post_id (int)
 	*  @return	$post_id (int)
 	*/
-	
-	function admin_footer_js() {
-		
-		?>acf.media.mime_types = <?php echo json_encode( get_allowed_mime_types() ); ?>;
-	<?php
+
+    function admin_footer()
+    {
+
+        ?>
+        <script type="text/javascript">
+            acf.media.mime_types = <?php echo json_encode(get_allowed_mime_types()); ?>;
+        </script>
+        <?php
 		
 	}
 	

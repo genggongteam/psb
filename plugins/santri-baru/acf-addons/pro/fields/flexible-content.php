@@ -57,6 +57,10 @@ class acf_field_flexible_content extends acf_field {
 		// ajax
 		add_action('wp_ajax_acf/fields/flexible_content/layout_title',			array($this, 'ajax_layout_title'));
 		add_action('wp_ajax_nopriv_acf/fields/flexible_content/layout_title',	array($this, 'ajax_layout_title'));
+
+
+        // filters
+        add_filter('acf/clone_field', array($this, 'acf_clone_field'), 10, 2);
 		
 		
 		// do not delete!
@@ -338,8 +342,8 @@ class acf_field_flexible_content extends acf_field {
 	<div class="acf-hidden">
 		<?php acf_hidden_input(array( 'name' => "{$field['name']}[{$i}][acf_fc_layout]", 'value' => $layout['name'] )); ?>
 	</div>
-	
-	<div class="acf-fc-layout-handle"><?php echo $title; ?></div>
+
+        <div class="acf-fc-layout-handle" title="<?php _e('Drag to reorder', 'acf'); ?>"><?php echo $title; ?></div>
 	
 	<ul class="acf-fc-layout-controlls acf-hl">
 		<li class="acf-fc-show-on-hover">
@@ -705,6 +709,10 @@ class acf_field_flexible_content extends acf_field {
 				
 				// get sub field
 				$sub_field = $layout[ $j ];
+
+
+                // bail ealry if no name (tab)
+                if (acf_is_empty($sub_field['name'])) continue;
 				
 				
 				// update full name
@@ -781,11 +789,7 @@ class acf_field_flexible_content extends acf_field {
 			
 			
 			// bail early if layout deosnt exist
-			if( empty($layouts[ $l ]) ) {
-				
-				continue;
-				
-			}
+            if (empty($layouts[$l])) continue;
 			
 			
 			// get layout
@@ -797,18 +801,26 @@ class acf_field_flexible_content extends acf_field {
 				
 				// get sub field
 				$sub_field = $layout[ $j ];
+
+
+                // bail ealry if no name (tab)
+                if (acf_is_empty($sub_field['name'])) continue;
 				
 				
 				// extract value
 				$sub_value = acf_extract_var( $value[ $i ], $sub_field['key'] );
-				
+
+
+                // update $sub_field name
+                $sub_field['name'] = "{$field['name']}_{$i}_{$sub_field['name']}";
+					
 				
 				// format value
 				$sub_value = acf_format_value( $sub_value, $post_id, $sub_field );
 				
 				
 				// append to $row
-				$value[ $i ][ $sub_field['name'] ] = $sub_value;
+                $value[$i][$sub_field['_name']] = $sub_value;
 				
 			}
 			
@@ -1057,31 +1069,92 @@ class acf_field_flexible_content extends acf_field {
 		
 		// save false for empty value
 		if( empty($order) ) {
-			
-			$order = false;
+
+            $order = '';
 		
 		}
 		
 		
 		// return
 		return $order;
-	}
+
+    }
 	
 	
 	/*
-	*  update_field()
+	*  delete_value
 	*
-	*  This filter is appied to the $field before it is saved to the database
+	*  description
 	*
-	*  @type	filter
-	*  @since	3.6
-	*  @date	23/01/13
+	*  @type	function
+	*  @date	1/07/2015
+	*  @since	5.2.3
 	*
-	*  @param	$field - the field array holding all the field options
-	*  @param	$post_id - the field group ID (post_type = acf)
-	*
-	*  @return	$field - the modified field
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
 	*/
+
+    function delete_value($post_id, $key, $field)
+    {
+
+        // get old value (db only)
+        $old_order = acf_get_metadata($post_id, $field['name']);
+
+
+        // bail early if no rows or no sub fields
+        if (empty($old_order)) return;
+
+
+        // vars
+        $layouts = array();
+
+
+        // populate $layouts
+        foreach ($field['layouts'] as $layout) {
+
+            $layouts[$layout['name']] = $layout['sub_fields'];
+
+        }
+
+
+        // loop
+        foreach ($old_order as $i => $l) {
+
+            // bail early if no layout
+            if (empty($layouts[$l])) continue;
+
+
+            // loop through sub fields
+            foreach ($layouts[$l] as $sub_field) {
+
+                // modify name for delete
+                $sub_field['name'] = "{$key}_{$i}_{$sub_field['name']}";
+
+
+                // delete value
+                acf_delete_value($post_id, $sub_field);
+
+            }
+
+        }
+
+    }
+
+
+    /*
+    *  update_field()
+    *
+    *  This filter is appied to the $field before it is saved to the database
+    *
+    *  @type	filter
+    *  @since	3.6
+    *  @date	23/01/13
+    *
+    *  @param	$field - the field array holding all the field options
+    *  @param	$post_id - the field group ID (post_type = acf)
+    *
+    *  @return	$field - the modified field
+    */
 
 	function update_field( $field ) {
 		
@@ -1231,10 +1304,10 @@ class acf_field_flexible_content extends acf_field {
 		
 		// options
    		$options = acf_parse_args( $_POST, array(
-			'post_id'		=>	0,
-			'i'				=>	0,
-			'field_key'		=>	'',
-			'nonce'			=>	'',
+            'post_id' => 0,
+            'i' => 0,
+            'field_key' => '',
+            'nonce' => '',
 			'layout'		=> '',
 			'acf'			=> array()
 		));
@@ -1294,13 +1367,18 @@ class acf_field_flexible_content extends acf_field {
 	
 	function get_layout_title( $field, $layout, $i, $value ) {
 
+        // vars
+        $rows = array();
+        $rows[$i] = $value;
+		
+		
 		// add loop
 		acf_add_loop(array(
 			'selector'	=> $field['name'],
 			'name'		=> $field['name'],
-			'value'		=> array( $value ),
+            'value' => $rows,
 			'field'		=> $field,
-			'i'			=> 0,
+            'i' => $i,
 			'post_id'	=> 0,
 		));
 		
@@ -1327,11 +1405,49 @@ class acf_field_flexible_content extends acf_field {
 		return $title;
 		
 	}
+
+
+    /*
+    *  acf_clone_field
+    *
+    *  This function will update clone field settings based on the origional field
+    *
+    *  @type	function
+    *  @date	28/06/2016
+    *  @since	5.3.8
+    *
+    *  @param	$clone (array)
+    *  @param	$field (array)
+    *  @return	$clone
+    */
+
+    function acf_clone_field($field, $clone_field)
+    {
+
+        // remove parent_layout
+        // - allows a sub field to be rendered as a normal field
+        unset($field['parent_layout']);
+
+
+        // attempt to merger parent_layout
+        if (isset($clone_field['parent_layout'])) {
+
+            $field['parent_layout'] = $clone_field['parent_layout'];
+
+        }
+
+
+        // return
+        return $field;
+
+    }
 	
 }
 
-new acf_field_flexible_content();
 
-endif;
+// initialize
+    acf_register_field_type(new acf_field_flexible_content());
+
+endif; // class_exists check
 
 ?>

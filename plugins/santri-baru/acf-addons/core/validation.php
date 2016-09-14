@@ -29,6 +29,10 @@ class acf_validation {
 		// ajax
 		add_action('wp_ajax_acf/validate_save_post',			array($this, 'ajax_validate_save_post'));
 		add_action('wp_ajax_nopriv_acf/validate_save_post',		array($this, 'ajax_validate_save_post'));
+
+
+        // filters
+        add_filter('acf/validate_save_post', array($this, 'acf_validate_save_post'), 5);
 		
 	}
 	
@@ -251,44 +255,61 @@ class acf_validation {
 	
 
 	/*
-	*  validate_save_post
+	*  acf_validate_save_post
 	*
-	*  This function will validate $_POST data and add errors
+	*  This function will loop over $_POST data and validate
 	*
-	*  @type	function
-	*  @date	25/11/2013
-	*  @since	5.0.0
+	*  @type	action 'acf/validate_save_post' 5
+	*  @date	7/09/2016
+	*  @since	5.4.0
 	*
-	*  @param	$show_errors (boolean) if true, errors will be shown via a wp_die screen
-	*  @return	(boolean)
+	*  @param	n/a
+	*  @return	n/a
 	*/
+
+    function acf_validate_save_post()
+    {
+
+        // bail early if no $_POST
+        if (empty($_POST['acf'])) return;
+
+
+        // loop
+        foreach ($_POST['acf'] as $field_key => $value) {
+
+            // get field
+            $field = acf_get_field($field_key);
+            $input = 'acf[' . $field_key . ']';
+
+
+            // bail early if not found
+            if (!$field) continue;
+
+
+            // validate
+            acf_validate_value($value, $field, $input);
+
+        }
+
+    }
+
+
+    /*
+    *  validate_save_post
+    *
+    *  This function will validate $_POST data and add errors
+    *
+    *  @type	function
+    *  @date	25/11/2013
+    *  @since	5.0.0
+    *
+    *  @param	$show_errors (boolean) if true, errors will be shown via a wp_die screen
+    *  @return	(boolean)
+    */
 	
 	function validate_save_post( $show_errors = false ) {
-		
-		// validate fields
-		if( !empty($_POST['acf']) ) {
-			
-			// loop
-			foreach( $_POST['acf'] as $field_key => $value ) {
-				
-				// get field
-				$field = acf_get_field( $field_key );
-				$input = 'acf[' . $field_key . ']';
-				
-				
-				// bail early if not found
-				if( !$field ) continue;
-				
-				
-				// validate
-				acf_validate_value( $value, $field, $input );
-				
-			}
-			
-		}
-		
-		
-		// action for 3rd party customization
+
+        // action
 		do_action('acf/validate_save_post');
 		
 		
@@ -302,8 +323,8 @@ class acf_validation {
 		
 		// show errors
 		if( $show_errors ) {
-				
-			$message = '<h2>Validation failed</h2>';
+
+            $message = '<h2>' . __('Validation failed', 'acf') . '</h2>';
 			$message .= '<ul>';
 			foreach( $errors as $error ) {
 				
