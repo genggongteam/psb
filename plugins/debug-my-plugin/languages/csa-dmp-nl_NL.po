@@ -1,0 +1,225 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Debug My Plugin v0.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-07-19 08:58:43+0000\n"
+"Last-Translator: De BAAT <De_BAAT@de-baat.nl>\n"
+"Language-Team: De B.A.A.T. <De_BAAT@de-baat.nl>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-Language: \n"
+"X-Poedit-Country: \n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: WPCSL-generic/classes/CSL-helper_class.php:94
+#@ wpcsl
+msgid "Click me to see the debugging goodness..."
+msgstr "Klik op mij om de debugging goedheid te zien..."
+
+#: WPCSL-generic/classes/CSL-license_class.php:201
+#@ csa-dmp
+msgid "You have not provided a valid license key for this plugin. Until you do so, it will only display content for Admin users."
+msgstr "U heeft geen valide license key voor deze plugin. Tot die tijd wordt de inhoud alleen getoond voor Admin users."
+
+#: WPCSL-generic/classes/CSL-notifications_class.php:55
+#@ content
+msgid "level"
+msgstr "niveau"
+
+#: WPCSL-generic/classes/CSL-notifications_class.php:89
+#@ csa-dmp
+msgid "needs attention"
+msgstr "heeft aandacht nodig"
+
+#: WPCSL-generic/classes/CSL-notifications_class.php:128
+#@ csa-dmp
+msgid "wants you to know"
+msgstr "moet je weten"
+
+#: WPCSL-generic/classes/CSL-notifications_class.php:140
+#, php-format
+#@ csa-dmp
+msgid "<p><strong><a href=\"%s\">%s</a> %s: </strong>"
+msgstr "<p><strong><a href=\"%s\">%s</a> %s: </strong>"
+
+#: WPCSL-generic/classes/CSL-plugin.php:684
+#@ csa-dmp
+msgid "DEBUG: No driver found."
+msgstr "DEBUG: Geen driver gevonden."
+
+#: WPCSL-generic/classes/CSL-plugin.php:696
+#: WPCSL-generic/classes/CSL-plugin.php:697
+#@ csa-dmp
+msgid "Support"
+msgstr "Support"
+
+#: WPCSL-generic/classes/CSL-plugin.php:700
+#@ csa-dmp
+msgid "Purchase"
+msgstr "Aankoop"
+
+#: WPCSL-generic/classes/CSL-plugin.php:701
+#@ csa-dmp
+msgid "Buy Now"
+msgstr "Koop Nu"
+
+#: WPCSL-generic/classes/CSL-plugin.php:704
+#: debug-my-plugin.php:344
+#: debug-my-plugin.php:443
+#@ csa-dmp
+msgid "Settings"
+msgstr "Instellingen"
+
+#: WPCSL-generic/classes/CSL-plugin.php:777
+#@ csa-dmp
+msgid "DEBUG: could not locate driver:"
+msgstr "DEBUG: kan lokale driver niet vinden:"
+
+#: WPCSL-generic/classes/CSL-plugin.php:828
+#: WPCSL-generic/classes/CSL-themes_class.php:118
+#@ csa-dmp
+msgid "Display Settings"
+msgstr "Toon Instellingen"
+
+#: WPCSL-generic/classes/CSL-plugin.php:868
+#@ csa-dmp
+msgid "Sets the locale for PHP program processing, affects time and currency processing. If you change this, save settings and then select money format."
+msgstr "Zet de locale voor PHP programma's, heeft invloed op tijd en munteenheid verwerking. Als u dit aanpast, bewaar de instellingen en selecteer het valuta formaat."
+
+#: WPCSL-generic/classes/CSL-plugin.php:879
+#@ csa-dmp
+msgid "Your PHP settings have disabled exec(), your locale list cannot be determined."
+msgstr "Uw PHP instellingen hebben exec() uitgeschakeld, uw locale lijst kan niet bepaald worden."
+
+#: WPCSL-generic/classes/CSL-plugin.php:897
+#@ csa-dmp
+msgid "This is based on your current locale, which is set to "
+msgstr "Dit is gebaseerd op uw huidige locale, die staat op: "
+
+#: WPCSL-generic/classes/CSL-plugin.php:948
+#@ csa-dmp
+msgid "This will disable the notification asking you to rate our product."
+msgstr "Dit zal de vraag om ons product te waarderen uitschakelen."
+
+#: WPCSL-generic/classes/CSL-plugin.php:1066
+#@ csa-dmp
+msgid "DEBUG: Shortcode called with attributes:"
+msgstr "DEBUG: Shortcode aangeroepen met attributen:"
+
+#: WPCSL-generic/classes/CSL-plugin.php:1071
+#@ csa-dmp
+msgid "DEBUG: Shortcode called with no attributes."
+msgstr "DEBUG: Shortcode aangeroepen zonder attributen."
+
+#: WPCSL-generic/classes/CSL-plugin.php:1120
+#@ csa-dmp
+msgid "DEBUG: Not OK To Show"
+msgstr "DEBUG: Niet OK Om Te Tonen"
+
+#: WPCSL-generic/classes/CSL-plugin.php:1188
+#@ csa-dmp
+msgid "No products found"
+msgstr "Geen producten gevonden"
+
+#: WPCSL-generic/classes/CSL-settings_class.php:24
+#@ csa-dmp
+msgid "Save Changes"
+msgstr "Bewaar Wijzigingen"
+
+#: WPCSL-generic/classes/CSL-settings_class.php:322
+#, php-format
+#@ csa-dmp
+msgid "Program Error: section <em>%s</em> not defined."
+msgstr "Program Error: sectie <em>%s</em> niet gedefinieerd."
+
+#: WPCSL-generic/classes/CSL-themes_class.php:55
+#, php-format
+#@ csa-dmp
+msgid "The theme directory:<br/>%s<br/>is missing. Create it to enable themes and get rid of this message."
+msgstr "Het thema directory:<br/>%s<br/>ontbreekt. Maak het aan om themas te ondersteunen en dit bericht niet meer te tonen."
+
+#: WPCSL-generic/classes/CSL-themes_class.php:119
+#@ csa-dmp
+msgid "Select A Theme"
+msgstr "Selecteer Een Thema"
+
+#: class.debugmyplugin_panel.php:29
+#@ csa-dmp
+msgid "My Plugin"
+msgstr "Mijn Plugin"
+
+#: class.debugmyplugin_panel.php:113
+#@ csa-dmp
+msgid "Dad. Husband. Rum Lover. Code Geek. Not necessarily in that order."
+msgstr "Vader. Echtgenoot. Dansliefhebber. Code Geek. Niet noodzakelijkerwijs in die volgorde."
+
+#. translators: plugin header field 'Name'
+#: debug-my-plugin.php:0
+#@ csa-dmp
+msgid "Debug My Plugin"
+msgstr "Debug Mijn Plugin"
+
+#. translators: plugin header field 'PluginURI'
+#: debug-my-plugin.php:0
+#@ csa-dmp
+msgid "http://www.charlestonsw.com/product/debug-my-plugin/"
+msgstr "http://www.charlestonsw.com/product/debug-my-plugin/"
+
+#. translators: plugin header field 'Description'
+#: debug-my-plugin.php:0
+#@ csa-dmp
+msgid "Debug your plugin with the help of Debug Bar.  Puts debugging messages in the drop down Debug Bar interface."
+msgstr "Debug uw plugin met behulp van de Debug Bar. Toont debug messages in het drop down Debug Bar interface."
+
+#. translators: plugin header field 'Author'
+#: debug-my-plugin.php:0
+#@ csa-dmp
+msgid "Charleston Software Associates"
+msgstr "Charleston Software Associates"
+
+#. translators: plugin header field 'AuthorURI'
+#: debug-my-plugin.php:0
+#@ csa-dmp
+msgid "http://www.charlestonsw.com"
+msgstr "http://www.charlestonsw.com"
+
+#. translators: plugin header field 'Version'
+#: debug-my-plugin.php:0
+#@ csa-dmp
+msgid "0.6"
+msgstr "0.6"
+
+#: debug-my-plugin.php:227
+#@ csa-dmp
+msgid "Show REQUEST"
+msgstr "Toon REQUEST"
+
+#: debug-my-plugin.php:228
+#@ csa-dmp
+msgid "Show REQUEST dump on start of main Debug My Plugin Panel."
+msgstr "Toon REQUEST dump bij start van main Debug Mijn Plugin Panel."
+
+#: debug-my-plugin.php:234
+#@ csa-dmp
+msgid "Show SERVER"
+msgstr "Toon SERVER"
+
+#: debug-my-plugin.php:235
+#@ csa-dmp
+msgid "Show SERVER dump on start of main Debug My Plugin Panel."
+msgstr "Toon SERVER dump bij start van main Debug Mijn Plugin Panel."
+
+#: debug-my-plugin.php:362
+#@ csa-dmp
+msgid "Use these settings to set behavior of the default Debug My Plugin panel."
+msgstr "Gebruik deze instellingen om het gedrag te bepalen van het standaard Debug Mijn Plugin panel."
+

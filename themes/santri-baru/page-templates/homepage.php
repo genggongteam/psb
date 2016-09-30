@@ -7,40 +7,71 @@
  * @package understrap
  */
 
-get_header(); ?>
+get_header();
+
+// Get Data From DB
+
+$all_rows=wp_count_posts( 'santri_baru' )->publish;
+
+
+
+
+
+?>
 
 <!-- Container -->
-<div class="container-iuf">
+<div class="container">
     <!-- Title -->
     <div class="title-iuf">
         <h2>Dashboard</h2>
     </div>
     <!-- End of Title -->
-
+    <?php
+    $ptypes = array('santri_baru','kota',''); //array with all of your post types
+    $tags = get_tags( array('name__like' => "a", 'order' => 'ASC') );
+    foreach ( (array) $tags as $tag ) { ?>
+        <li>
+            <a href="<?php echo get_tag_link( $tag->term_id ) ?>">
+                <span class="name"><?php echo $tag->name ?></span>
+                <span class="number">
+            <?php
+            $count = 1;
+            foreach($ptypes as $t){
+                echo get_term_post_count_by_type($tag,'post_tag',$t) . " " . $t;
+                if (count($ptypes) != $count){
+                    echo " | ";
+                    $count = $count + 1;
+                }
+            }
+            ?>
+            </span>
+            </a>
+        </li>
+    <?php } ?>
     <!-- Counter Wrap -->
     <div class="counter-iuf">
         <div class="registered-iuf counter-item-iuf">
             <div class="counter-wrap-iuf">
                 <h1><?php echo $all_rows; ?></h1>
-                <p>Total Registered</p>
+                <p>Semua Santri</p>
             </div>
         </div>
         <div class="attended-iuf counter-item-iuf">
             <div class="counter-wrap-iuf">
-                <h1><?php echo $attender; ?></h1>
-                <p>Total Attended</p>
+                <h1><?php echo countPostByTax('santri_baru','status','aktif'); ?></h1>
+                <p>Santri</p>
             </div>
         </div>
         <div class="paid-iuf counter-item-iuf">
             <div class="counter-wrap-iuf">
-                <h1><?php echo $paid; ?></h1>
-                <p>Paid Member</p>
+                <h1><?php echo countPostByTax('santri_baru','status','calon-santri'); ?></h1>
+                <p>Calon Santri</p>
             </div>
         </div>
         <div class="participant-iuf counter-item-iuf">
             <div class="counter-wrap-iuf">
-                <h1><?php echo $participant_t; ?></h1>
-                <p>Participant</p>
+                <h1><?php echo countPostByTax('santri_baru','status','memundurkan-diri'); ?></h1>
+                <p>Memundurkan Diri</p>
             </div>
         </div>
         <div class="auth-iuf counter-item-iuf">

@@ -1,0 +1,43 @@
+# Copyright (C) 2013 Debug My Plugin
+# This file is distributed under the same license as the Debug My Plugin package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Debug My Plugin 0.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/debug-my-plugin\n"
+"POT-Creation-Date: 2013-03-23 23:28:28+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: class.debugmyplugin_panel.php:59
+msgid "My Plugin"
+msgstr ""
+
+#: class.debugmyplugin_panel.php:81
+msgid ""
+"It's like mother always told me, \"If you ain't got nothing nice to say, "
+"then don't say nothing.\" - Eminem"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Debug My Plugin"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.charlestonsw.com/products/debug-my-plugin/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Debug your plugin development with the help of Debug Bar."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Charleston Software Associates"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.charlestonsw.com"
+msgstr ""
